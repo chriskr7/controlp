@@ -1,65 +1,59 @@
-/******************************************************************************/
-/*  File        : __lz.mk                                                     */
-/*  Description : lzlib makefile environment                                  */
-/*  Author      : LaZy                                                        */
-/*  Contacts    : chriskr7@gmail.com                                          */
-/******************************************************************************/
+################################################################################
+##  File        : __lz.mk                                                     ##
+##  Description : controlp makefile environment                               ##
+##  Author      : LaZyDev                                                     ##
+##  Contacts    : chriskr7@gmail.com                                          ##
+################################################################################
 
 #
 # Compile Environment
 #
 
-TARGET = LINUX
+TARGET = MAC
 
 XCC = g++
 
 # Home Path
-LZLIB_HOME = $(LZLIB_DIR)
-LZLIB_CHOME = $(LZLIB_HOME)
+CP_HOME = $(CP_DIR)
+CP_CHOME = $(CP_HOME)
 
 # Other Path
-LZLIB_LIB = $(LZLIB_HOME)/lib
-LZLIB_ENV = $(LZLIB_HOME)/env
-LZLIB_INC = $(LZLIB_HOME)/inc
-LZLIB_SRC = $(LZLIB_HOME)/src
-
-# Boost Path
-BOOST_PATH = $(LZLIB_HOME)/boost/stage/lib
-BOOST_INC = $(LZLIB_HOME)/boost/
+CP_LIB = $(CP_HOME)/lib
+CP_ENV = $(CP_HOME)/env
+CP_INC = $(CP_HOME)/inc
+CP_SRC = $(CP_HOME)/src
 
 #OPT Mode Define
 LINUX.OMODE = -w -fPIC
+MAC.OMODE = -w -fPIC
 
 #Debug Optioin
 LINUX.DEBUG_OPT = -g -DDEBUG
+MAC.DEBUG_OPT = -g -DDEBUG
 
 #THREAD Compile Option Define
 LINUX.THREAD.CFLAGS = -D_THREAD_SAFE -D_GNU_SOURCE
-
-#Compile Option Define
-LINUX.CFLAGS = -I$(LZLIB_INC) $($(TARGET).OMODE) $($(TARGET).THREAD.CFLAGS) $($(TARGET).PTHREAD.LFLAGS)
-LINUX.DCFLAGS = -I$(LZLIB_INC) $($(TARGET).OMODE) $($(TARGET).THREAD.CFLAGS) $($(TARGET).DEBUG_OPT)
-LINUX.CPPFLAGS = -I$(BOOST_INC) $(LINUX.CFLAGS) -L/usr/lib/gcc/x86_64-redhat-linux/4.1.1/libstdc++.so
-LINUX.DCPPFLAGS = -I$(BOOST_INC) $(LINUX.CFLAGS) $($(TARGET).DEBUG_OPT) -L/usr/lib/gcc/x86_64-redhat-linux/4.1.1/libstdc++.so
-
+MAC.THREAD.CFLAGS = -D_THREAD_SAFE -D_GNU_SOURCE
 
 #PTHREAD Load Option Define
 LINUX.PTHREAD.LFLAGS=-lpthread -ldl -lrt
+MAC.PTHREAD.LFLAGS=-lpthread -ldl
 
 #SOCKET Load Option Define
 LINUX.SOCKET.LFLAGS=-lnsl
+MAC.SOCKET.LFLAGS=
 
 #ISAM Load Option Define
 LINUX.CISAM.LFLAGS=-lisam
+MAC.CISAM.LFLAGS=-lisam
 
 #MATH Load Option
 LINUX.MATH.LFLAGS=-lm
+MAC.MATH.LFLAGS=-lm
 
-#Load Option Define
-LINUX.LFLAGS=$($(TARGET).PTHREAD.LFLAGS) $($(TARGET).SOCKET.LFLAGS) $($(TARGET).MATH.LFLAGS -L$(LZLIB_LIB)
-
-CFLAGS=$(LINUX.DCFLAGS)
-CPPFLAGS=$(LINUX.CPPFLAGS)
-DCPPFLAGS=$(LINUX.DCPPFLAGS)
-LFLAGS=$(LINUX.LFLAGS)
-
+#Compile Option Define
+CFLAGS = -I$(CP_INC) $($(TARGET).OMODE) $($(TARGET).THREAD.CFLAGS) $($(TARGET).PTHREAD.LFLAGS)
+DCFLAGS = -I$(CP_INC) $($(TARGET).OMODE) $($(TARGET).THREAD.CFLAGS) $($(TARGET).DEBUG_OPT)
+LFLAGS=$($(TARGET).PTHREAD.LFLAGS) $($(TARGET).SOCKET.LFLAGS) $($(TARGET).MATH.LFLAGS -L$(CP_LIB)
+# CPPFLAGS = -I$(BOOST_INC) $(LINUX.CFLAGS) -L/usr/lib/gcc/x86_64-redhat-linux/4.1.1/libstdc++.so
+# DCPPFLAGS = -I$(BOOST_INC) $(LINUX.CFLAGS) $($(TARGET).DEBUG_OPT) -L/usr/lib/gcc/x86_64-redhat-linux/4.1.1/libstdc++.so

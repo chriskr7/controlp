@@ -5,6 +5,9 @@
 ##  Contacts    : chriskr7@gmail.com                                          ##
 ################################################################################
 
+# Shell
+SHELL=/bin/bash
+
 #
 # Compile Environment
 #
@@ -14,7 +17,6 @@ TARGET = MAC
 XCC = g++
 
 # Home Path
-CP_HOME = $(CP_DIR)
 CP_CHOME = $(CP_HOME)
 
 # Other Path

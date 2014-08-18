@@ -3,7 +3,7 @@
 /*  Description : LaZy datetime                                               */
 /*  Written     : 2013.05                                                     */
 /*  Version     : 0.1                                                         */
-/*  Author      : LaZy                                                        */
+/*  Author      : LaZyDev                                                     */
 /*  Contacts    : chriskr7@gmail.com                                          */
 /******************************************************************************/
 
@@ -29,7 +29,7 @@
  *		lz_date interface
  *
  *-----------------------------------------*/
- 
+
 void lz_date_init(p_lz_date p_date)
 {
 	p_date->pthis = &lz_date_method_tbl;
@@ -40,10 +40,10 @@ void lz_date_get_localdate(p_lz_date p_date)
 {
 	struct tm ltm;
 	time_t ltime;
-	
+
 	time(&ltime);
 	localtime_r(&ltime, &ltm);
-	
+
 	p_date->year = (ltm.tm_year + 1900);
 	p_date->month = (ltm.tm_mon + 1);
 	p_date->day = ltm.tm_mday;
@@ -98,7 +98,7 @@ int lz_date_prev_date(p_lz_date p_bdate, p_lz_date p_pdate, int prev)
 {
 	struct tm btm;
 	time_t btime;
-	
+
 	btm.tm_year = (p_bdate->year - 1900);
 	btm.tm_mon = (p_bdate->month - 1);
 	btm.tm_mday = p_bdate->day;
@@ -106,17 +106,17 @@ int lz_date_prev_date(p_lz_date p_bdate, p_lz_date p_pdate, int prev)
 	btm.tm_min = 0;
 	btm.tm_sec = 1;
 	btm.tm_isdst = -1;
-	
+
 	btime = mktime(&btm);
 	if(btime == -1){
 		return -1;
 	}
-	
+
 	btime -= (prev * SEC_OF_DAY);
-	
+
 	localtime_r(&btime, &btm);
 	lz_date_from_tm(p_pdate, &btm);
-	
+
 	return 0;
 }
 
@@ -125,7 +125,7 @@ int lz_date_next_date(p_lz_date p_bdate, p_lz_date p_ndate, int next)
 {
 	struct tm btm;
 	time_t btime;
-	
+
 	btm.tm_year = (p_bdate->year - 1900);
 	btm.tm_mon = (p_bdate->month - 1);
 	btm.tm_mday = p_bdate->day;
@@ -133,17 +133,17 @@ int lz_date_next_date(p_lz_date p_bdate, p_lz_date p_ndate, int next)
 	btm.tm_min = 0;
 	btm.tm_sec = 1;
 	btm.tm_isdst = -1;
-	
+
 	btime = mktime(&btm);
 	if(btime == -1){
 		return -1;
 	}
-	
+
 	btime += (next * SEC_OF_DAY);
-	
+
 	localtime_r(&btime, &btm);
 	lz_date_from_tm(p_ndate, &btm);
-	
+
 	return 0;
 }
 
@@ -152,7 +152,7 @@ int lz_date_weekday(p_lz_date p_date)
 {
 	struct tm btm;
 	time_t btime;
-	
+
 	btm.tm_year = (p_date->year - 1900);
 	btm.tm_mon = (p_date->month - 1);
 	btm.tm_mday = p_date->day;
@@ -160,14 +160,14 @@ int lz_date_weekday(p_lz_date p_date)
 	btm.tm_min = 0;
 	btm.tm_sec = 1;
 	btm.tm_isdst = -1;
-	
+
 	btime = mktime(&btm);
 	if(btime == -1){
 		return -1;
 	}
-	
+
 	localtime_r(&btime, &btm);
-	
+
 	return btm.tm_wday;
 }
 
@@ -185,7 +185,7 @@ p_lz_date new_lz_date()
 	p_date = (p_lz_date)malloc(sizeof(lz_date));
 	if(p_date)
 		p_date->pthis = &lz_date_method_tbl;
-	
+
 	return p_date;
 }
 
@@ -204,7 +204,7 @@ void delete_lz_date(p_lz_date p_date)
  *		lz_time interface
  *
  *-----------------------------------------*/
- 
+
 void lz_time_init(p_lz_time p_time)
 {
 	p_time->pthis = &lz_time_method_tbl;
@@ -215,10 +215,10 @@ void lz_time_get_localtime(p_lz_time p_time)
 {
 	struct tm ltm;
 	struct timeb ltb;
-	
+
 	ftime(&ltb);
 	localtime_r(&ltb.time, &ltm);
-	
+
 	p_time->hour = ltm.tm_hour;
 	p_time->min = ltm.tm_min;
 	p_time->sec = ltm.tm_sec;
@@ -314,7 +314,7 @@ p_lz_time new_lz_time()
 	p_time = (p_lz_time)malloc(sizeof(lz_time));
 	if(p_time)
 		p_time->pthis = &lz_time_method_tbl;
-		
+
 	return p_time;
 }
 
@@ -334,24 +334,24 @@ void delete_lz_time(p_lz_time p_time)
  *		lz_time interface
  *
  *-----------------------------------------*/
- 
+
 void lz_datetime_init(p_lz_datetime p_dt)
 {
-	p_dt->pthis = &lz_datetime_method_tbl;	
+	p_dt->pthis = &lz_datetime_method_tbl;
 }
 
- 
+
 void lz_datetime_get_ldatetime(p_lz_datetime p_dt)
 {
 	struct tm ltm;
 	struct timeb ltb;
-	
+
 	ftime(&ltb);
 	localtime_r(&ltb.time, &ltm);
-	
+
 	p_dt->year = (ltm.tm_year + 1900);
 	p_dt->month = (ltm.tm_mon + 1);
-	p_dt->day = ltm.tm_mday;	
+	p_dt->day = ltm.tm_mday;
 	p_dt->hour = ltm.tm_hour;
 	p_dt->min = ltm.tm_min;
 	p_dt->sec = ltm.tm_sec;
@@ -361,32 +361,32 @@ void lz_datetime_get_ldatetime(p_lz_datetime p_dt)
 
 char* lz_datetime_to_string(p_lz_datetime p_dt, char* str)
 {
-	sprintf(str, "%04d%02d%02d%02d%02d%02d", 
-		p_dt->year, p_dt->month, p_dt->day, p_dt->hour, p_dt->min, p_dt->sec);	
+	sprintf(str, "%04d%02d%02d%02d%02d%02d",
+		p_dt->year, p_dt->month, p_dt->day, p_dt->hour, p_dt->min, p_dt->sec);
 	return str;
 }
 
 
 char* lz_datetime_to_fmt_string(p_lz_datetime p_dt, char* str)
 {
-	sprintf(str, "%04d-%02d-%02d %02d:%02d:%02d", 
-		p_dt->year, p_dt->month, p_dt->day, p_dt->hour, p_dt->min, p_dt->sec);	
+	sprintf(str, "%04d-%02d-%02d %02d:%02d:%02d",
+		p_dt->year, p_dt->month, p_dt->day, p_dt->hour, p_dt->min, p_dt->sec);
 	return str;
 }
 
 
 char* lz_datetime_to_stringm(p_lz_datetime p_dt, char* str)
 {
-	sprintf(str, "%04d%02d%02d%02d%02d%02d%03d", 
-		p_dt->year, p_dt->month, p_dt->day, p_dt->hour, p_dt->min, p_dt->sec, p_dt->mille_sec);	
+	sprintf(str, "%04d%02d%02d%02d%02d%02d%03d",
+		p_dt->year, p_dt->month, p_dt->day, p_dt->hour, p_dt->min, p_dt->sec, p_dt->mille_sec);
 	return str;
 }
 
 
 char* lz_datetime_to_fmt_stringm(p_lz_datetime p_dt, char* str)
 {
-	sprintf(str, "%04d-%02d-%02d %02d:%02d:%02d.%03d", 
-		p_dt->year, p_dt->month, p_dt->day, p_dt->hour, p_dt->min, p_dt->sec, p_dt->mille_sec);	
+	sprintf(str, "%04d-%02d-%02d %02d:%02d:%02d.%03d",
+		p_dt->year, p_dt->month, p_dt->day, p_dt->hour, p_dt->min, p_dt->sec, p_dt->mille_sec);
 	return str;
 }
 
@@ -429,7 +429,7 @@ void lz_datetime_from_tm(p_lz_datetime p_dt, struct tm* p_tm)
 {
 	p_dt->year = (p_tm->tm_year + 1900);
 	p_dt->month = (p_tm->tm_mon + 1);
-	p_dt->day = p_tm->tm_mday;	
+	p_dt->day = p_tm->tm_mday;
 	p_dt->hour = p_tm->tm_hour;
 	p_dt->min = p_tm->tm_min;
 	p_dt->sec = p_tm->tm_sec;
@@ -441,7 +441,7 @@ void lz_datetime_to_datetime(p_lz_datetime p_dt, p_lz_date p_date, p_lz_time p_t
 	p_date->year = p_dt->year;
 	p_date->month = p_dt->month;
 	p_date->day = p_dt->day;
-	
+
 	p_time->hour = p_dt->hour;
 	p_time->min = p_dt->min;
 	p_time->sec = p_dt->sec;
@@ -484,7 +484,7 @@ p_lz_datetime new_lz_datetime()
 	p_dt = (p_lz_datetime)malloc(sizeof(lz_datetime));
 	if(p_dt)
 		p_dt->pthis = &lz_datetime_method_tbl;
-		
+
 	return p_dt;
 }
 
@@ -501,21 +501,21 @@ void convert_datetime_kor(p_lz_datetime src_dt, char* src_tz, p_lz_datetime kor_
 	struct tm mytm;
 	time_t mytime;
 	char buf[80];
-	
+
 	sprintf(buf, "TZ=%s", src_tz);
 	dt_lock(1);
 	putenv(buf);
 	tzset();
 	lz_datetime_to_tm(src_dt, &mytm);
 	mytime = mktime(&mytm);
-	
+
 	memset(buf, 0x00, 80);
 	sprintf(buf, "TZ=Asia/Seoul");
 	putenv(buf);
 	tzset();
 	localtime_r(&mytime, &mytm);
 	dt_lock(0);
-	
+
 	lz_datetime_from_tm(kor_dt, &mytm);
 }
 
@@ -525,21 +525,21 @@ void convert_datetime(p_lz_datetime src_dt, char* src_tz, p_lz_datetime out_dt, 
 	struct tm mytm;
 	time_t mytime;
 	char buf[80];
-	
+
 	sprintf(buf, "TZ=%s", src_tz);
 	dt_lock(1);
 	putenv(buf);
 	tzset();
 	lz_datetime_to_tm(src_dt, &mytm);
 	mytime = mktime(&mytm);
-	
+
 	memset(buf, 0x00, 80);
 	sprintf(buf, "TZ=%s", out_tz);
 	putenv(buf);
 	tzset();
 	localtime_r(&mytime, &mytm);
 	dt_lock(0);
-	
+
 	lz_datetime_from_tm(out_dt, &mytm);
 }
 
@@ -549,12 +549,12 @@ void dt_lock(int onoff)
 	static pthread_mutex_t dt_mutex;
 	static int initialized = 0;
 	static char tz[80];
-	
+
 	if(!initialized){
 		if(pthread_mutex_init(&dt_mutex, NULL) == 0)
 			initialized = 1;
 	}
-	
+
 	if(onoff){
 		pthread_mutex_lock(&dt_mutex);
 	}

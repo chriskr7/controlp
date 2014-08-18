@@ -36,7 +36,7 @@ void lz_log(const char* file_path, const char* file_name, char* src_file, int li
 
 	today.pthis->get_localdate(&today);
 
-	sprintf(file_nm, "%s/%s%02d%02d", file_path, file_name, today.month, today.day);
+	sprintf(file_nm, "%s/%s_%d%02d%02d", file_path, file_name, today.year, today.month, today.day);
 
 	log_fp = fopen(file_nm, "a");
 	if(log_fp == NULL){

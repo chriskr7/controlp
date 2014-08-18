@@ -12,7 +12,7 @@ SHELL=/bin/bash
 # Compile Environment
 #
 
-TARGET = MAC
+TARGET = $(shell $(CP_HOME)/env/check_machine.sh)
 
 XCC = g++
 
@@ -26,36 +26,36 @@ CP_INC = $(CP_HOME)/inc
 CP_SRC = $(CP_HOME)/src
 
 #OPT Mode Define
-LINUX.OMODE = -w -fPIC
-MAC.OMODE = -w -fPIC
+Linux.OMODE = -w -fPIC
+Darwin.OMODE = -w -fPIC
 
 #Debug Optioin
-LINUX.DEBUG_OPT = -g -DDEBUG
-MAC.DEBUG_OPT = -g -DDEBUG
+Linux.DEBUG_OPT = -g -DDEBUG
+Darwin.DEBUG_OPT = -g -DDEBUG
 
 #THREAD Compile Option Define
-LINUX.THREAD.CFLAGS = -D_THREAD_SAFE -D_GNU_SOURCE
-MAC.THREAD.CFLAGS = -D_THREAD_SAFE -D_GNU_SOURCE
+Linux.THREAD.CFLAGS = -D_THREAD_SAFE -D_GNU_SOURCE
+Darwin.THREAD.CFLAGS = -D_THREAD_SAFE -D_GNU_SOURCE
 
 #PTHREAD Load Option Define
-LINUX.PTHREAD.LFLAGS=-lpthread -ldl -lrt
-MAC.PTHREAD.LFLAGS=-lpthread -ldl
+Linux.PTHREAD.LFLAGS=-lpthread -ldl -lrt
+Darwin.PTHREAD.LFLAGS=-lpthread -ldl
 
 #SOCKET Load Option Define
-LINUX.SOCKET.LFLAGS=-lnsl
-MAC.SOCKET.LFLAGS=
+Linux.SOCKET.LFLAGS=-lnsl
+Darwin.SOCKET.LFLAGS=
 
 #ISAM Load Option Define
-LINUX.CISAM.LFLAGS=-lisam
-MAC.CISAM.LFLAGS=-lisam
+Linux.CISAM.LFLAGS=-lisam
+Darwin.CISAM.LFLAGS=-lisam
 
 #MATH Load Option
-LINUX.MATH.LFLAGS=-lm
-MAC.MATH.LFLAGS=-lm
+Linux.MATH.LFLAGS=-lm
+Darwin.MATH.LFLAGS=-lm
 
 #Compile Option Define
 CFLAGS = -I$(CP_INC) $($(TARGET).OMODE) $($(TARGET).THREAD.CFLAGS) $($(TARGET).PTHREAD.LFLAGS)
 DCFLAGS = -I$(CP_INC) $($(TARGET).OMODE) $($(TARGET).THREAD.CFLAGS) $($(TARGET).DEBUG_OPT)
 LFLAGS=$($(TARGET).PTHREAD.LFLAGS) $($(TARGET).SOCKET.LFLAGS) $($(TARGET).MATH.LFLAGS -L$(CP_LIB)
-# CPPFLAGS = -I$(BOOST_INC) $(LINUX.CFLAGS) -L/usr/lib/gcc/x86_64-redhat-linux/4.1.1/libstdc++.so
-# DCPPFLAGS = -I$(BOOST_INC) $(LINUX.CFLAGS) $($(TARGET).DEBUG_OPT) -L/usr/lib/gcc/x86_64-redhat-linux/4.1.1/libstdc++.so
+# CPPFLAGS = -I$(BOOST_INC) $(Linux.CFLAGS) -L/usr/lib/gcc/x86_64-redhat-Linux/4.1.1/libstdc++.so
+# DCPPFLAGS = -I$(BOOST_INC) $(Linux.CFLAGS) $($(TARGET).DEBUG_OPT) -L/usr/lib/gcc/x86_64-redhat-Linux/4.1.1/libstdc++.so

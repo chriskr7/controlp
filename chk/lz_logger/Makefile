@@ -1,6 +1,6 @@
 include $(CP_HOME)/env/__lz.mk
 
-PROGS= test_util
+PROGS= test_logger
 
 LDFLAG= $(CP_LIB)/liblzutil.a
 
@@ -11,7 +11,7 @@ LDFLAG= $(CP_LIB)/liblzutil.a
 
 all: $(PROGS)
 
-$(PROGS): test_util.c
+$(PROGS): test_logger.c
 	$(CC) -o $@ $@.c -I$(CP_INC)/lzutil/ $(LFLAGS) $(LDFLAG) -lm
 
 

@@ -3,7 +3,7 @@
 /*  Description : LaZy util header                                            */
 /*  Written     : 2013.05                                                     */
 /*  Version     : 0.1                                                         */
-/*  Author      : LaZy                                                        */
+/*  Author      : LaZyDev                                                     */
 /*  Contacts    : chriskr7@gmail.com                                          */
 /******************************************************************************/
 
@@ -15,7 +15,7 @@
  *	@version 0.1
  *	@brief Header defines utils
  */
- 
+
 #ifndef __LZ_UTIL_H__
 #define __LZ_UTIL_H__
 

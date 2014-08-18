@@ -3,7 +3,7 @@
 /*  Description : LaZy datetime header                                        */
 /*  Written     : 2013.05                                                     */
 /*  Version     : 0.1                                                         */
-/*  Author      : LaZy                                                        */
+/*  Author      : LaZyDev                                                     */
 /*  Contacts    : chriskr7@gmail.com                                          */
 /******************************************************************************/
 

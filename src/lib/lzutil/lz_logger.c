@@ -17,7 +17,7 @@
  */
 
 #include <stdarg.h>
-#include "lz_util.h"
+#include "lz_logger.h"
 #include "lz_datetime.h"
 
 void lz_log(const char* file_path, const char* file_name, char* src_file, int line, const char* fmt, ...)
